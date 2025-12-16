@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AuroraPodcast</title>
+
+  <!-- Mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- SIDE DRAWER -->
+<div id="drawer" class="drawer">
+  <div class="drawer-header">
+    <div class="logo">🎓</div>
+    <h3>AuroraPodcast</h3>
+  </div>
+
+  <a href="index.html">🏠 Home</a>
+  <a href="about.html">ℹ️ About</a>
+  <a href="contact.html">📞 Contact</a>
+  <a href="#">❓ Help</a>
+</div>
+
+
+<div class="app">
+
+  <!-- HEADER -->
+  <header>
+    <span class="menu" onclick="toggleMenu()">☰</span>
+    <h1>AuroraPodcast</h1>
+    <span class="theme" onclick="toggleDark()">🌙</span>
+  </header>
+
+  <!-- UPCOMING -->
+  <div class="card">
+    <h2>Upcoming Events</h2>
+    <div class="row">
+      <div class="play-btn" onclick="playAudio('upcoming.mp3', this)">▶</div>
+      <div>
+        <p class="title">Upcoming Event Audio</p>
+        <p class="subtitle">Announcements & Schedules</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAST -->
+  <div class="card">
+    <h2>Past Events</h2>
+    <div class="row">
+      <div class="play-btn gray" onclick="playAudio('past.mp3', this)">▶</div>
+      <div>
+        <p class="title">Past Event Audio</p>
+        <p class="subtitle">Event Recordings</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RULES -->
+  <div class="card">
+    <h2>College Rules & Regulations</h2>
+    <p class="rules">
+      Students must follow college discipline, attend classes regularly,
+      and respect faculty and peers.
+    </p>
+    <button class="full-btn" onclick="playAudio('rules.mp3', this)">
+      🔊 Play Full Audio
+    </button>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    Developed by Charan | Aurora Tech<br>
+    Version 1.0
+  </footer>
+
+</div>
+
+<!-- HIDDEN AUDIO PLAYER -->
+<audio id="player"></audio>
+
+<!-- JS -->
+<script src="script.js"></script>
+
+</body>
+</html>
