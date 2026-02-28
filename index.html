@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aurora Podcast</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1e3a5f">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    html, body { display: block !important; }
+    #splash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(160deg, #1e3a5f 0%, #0f172a 50%, #1e3a5f 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    #splash.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .splash-content {
+      text-align: center;
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    .splash-logo {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      margin: 0 auto 20px;
+      box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
+      animation: float 3s ease-in-out infinite, scaleIn 0.5s ease forwards;
+    }
+    .splash-title {
+      color: white;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+      animation: fadeIn 0.8s ease 0.2s forwards;
+      opacity: 0;
+    }
+    .splash-subtitle {
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      animation: fadeIn 0.8s ease 0.4s forwards;
+      opacity: 0;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes scaleIn {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @keyframes progress {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+    @media (max-width: 420px) {
+      .splash-logo { width: 80px; height: 80px; font-size: 36px; border-radius: 20px; }
+      .splash-title { font-size: 22px; }
+      .splash-subtitle { font-size: 11px; }
+    }
+    @media (max-width: 380px) {
+      .splash-logo { width: 70px; height: 70px; font-size: 32px; border-radius: 18px; }
+      .splash-title { font-size: 20px; }
+      .splash-subtitle { font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="splash">
+  <div class="splash-content">
+    <div class="splash-logo">🎙️</div>
+    <div class="splash-title">Aurora Podcast</div>
+    <div class="splash-subtitle">College Audio Platform</div>
+
+  </div>
+</div>
+
+<div id="drawer">
+  <div class="drawer-header">
+    <div class="logo">🎙️</div>
+    <h3>Aurora Podcast</h3>
+  </div>
+  <a href="index.html" class="active">Home</a>
+  <a href="events.html">Events</a>
+  <a href="notifications.html">Alerts</a>
+  <a href="downloads.html">Downloads</a>
+  <a href="profile.html">Profile</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div id="overlay" onclick="toggleMenu()"></div>
+
+<div class="app">
+
+  <header>
+    <span class="menu" onclick="toggleMenu()">☰</span>
+    <h1>Aurora Podcast</h1>
+  </header>
+
+  <div class="welcome-card">
+    <div class="welcome-content">
+      <h2>Welcome Back!</h2>
+      <p>Listen to college updates</p>
+    </div>
+    <div class="welcome-icon">🎧</div>
+  </div>
+
+  <div class="search-box">
+    <input type="text" placeholder="Search episodes...">
+  </div>
+
+  <div class="section-title">
+    <h3>New Episodes</h3>
+  </div>
+
+  <div class="episode-item">
+    <div class="episode-icon">📢</div>
+    <div class="episode-content">
+      <h4>Mid-Term Results</h4>
+      <p>Admin Office • 5 min ago</p>
+    </div>
+    <button class="play-btn" onclick="playAudio('upcoming.mp3', this)">▶</button>
+  </div>
+
+  <div class="episode-item">
+    <div class="episode-icon">📋</div>
+    <div class="episode-content">
+      <h4>Exam Guidelines 2026</h4>
+      <p>Admin Office • 1 day ago</p>
+    </div>
+    <button class="play-btn" onclick="playAudio('past.mp3', this)">▶</button>
+  </div>
+
+  <div class="episode-item">
+    <div class="episode-icon">💼</div>
+    <div class="episode-content">
+      <h4>Placement Updates</h4>
+      <p>Career Cell • 2 days ago</p>
+    </div>
+    <button class="play-btn" onclick="playAudio('rules.mp3', this)">▶</button>
+  </div>
+
+  <div class="section-title">
+    <h3>Recent</h3>
+  </div>
+
+  <div class="episode-item">
+    <div class="episode-icon gray">▶</div>
+    <div class="episode-content">
+      <h4>College Rules</h4>
+      <p>Yesterday</p>
+    </div>
+    <button class="play-btn" onclick="playAudio('rules.mp3', this)">▶</button>
+  </div>
+
+  <div class="episode-item">
+    <div class="episode-icon gray">▶</div>
+    <div class="episode-content">
+      <h4>Past Events</h4>
+      <p>2 days ago</p>
+    </div>
+    <button class="play-btn" onclick="playAudio('past.mp3', this)">▶</button>
+  </div>
+
+  <footer>
+    Aurora Podcast v2.0<br>
+    Developed by Charan | Aurora Tech
+  </footer>
+
+</div>
+
+<div id="nowPlaying" class="now-playing-bar">
+  <div class="np-info">
+    <span class="np-icon">▶</span>
+    <div>
+      <p class="np-title" id="npTitle">Not Playing</p>
+      <p class="np-subtitle">Select an episode</p>
+    </div>
+  </div>
+  <button class="np-btn" onclick="stopAudio()">⏹</button>
+</div>
+
+<nav class="bottom-nav">
+  <div class="nav-item active">
+    <span class="nav-icon">🏠</span>
+    <span class="nav-label">Home</span>
+  </div>
+  <div class="nav-item" onclick="window.location.href='notifications.html'">
+    <span class="nav-icon">🔔</span>
+    <span class="nav-label">Alerts</span>
+  </div>
+  <div class="nav-item" onclick="window.location.href='events.html'">
+    <span class="nav-icon">📅</span>
+    <span class="nav-label">Events</span>
+  </div>
+  <div class="nav-item" onclick="window.location.href='downloads.html'">
+    <span class="nav-icon">⬇️</span>
+    <span class="nav-label">Downloads</span>
+  </div>
+  <div class="nav-item" onclick="window.location.href='profile.html'">
+    <span class="nav-icon">👤</span>
+    <span class="nav-label">Profile</span>
+  </div>
+</nav>
+
+<audio id="player"></audio>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="firebase-init.js"></script>
+<script>
+  const splashShown = sessionStorage.getItem('splashShown');
+  const splash = document.getElementById('splash');
+  document.body.style.display = 'block';
+  
+  if (!splashShown) {
+    sessionStorage.setItem('splashShown', 'true');
+    setTimeout(() => {
+      splash.classList.add('hidden');
+    }, 2000);
+  } else {
+    splash.style.display = 'none';
+  }
+</script>
+<script src="script.js"></script>
+</body>
+</html>

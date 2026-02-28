@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile - Aurora Podcast</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1e3a5f">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    #splash { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(160deg, #1e3a5f 0%, #0f172a 50%, #1e3a5f 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.6s ease, transform 0.6s ease; }
+    #splash.hidden { opacity: 0; transform: scale(1.1); pointer-events: none; }
+    .splash-content { text-align: center; animation: fadeInUp 0.8s ease forwards; }
+    .splash-logo { width: 100px; height: 100px; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); border-radius: 24px; display: flex; align-items: center; justify-content: center; font-size: 48px; margin: 0 auto 20px; box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4); animation: float 3s ease-in-out infinite, scaleIn 0.5s ease forwards; }
+    .splash-title { color: white; font-size: 26px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.5px; animation: fadeIn 0.8s ease 0.2s forwards; opacity: 0; }
+    .splash-subtitle { color: rgba(255,255,255,0.6); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; animation: fadeIn 0.8s ease 0.4s forwards; opacity: 0; }
+
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @keyframes scaleIn { 0% { transform: scale(0); opacity: 0; } 50% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+    @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+    @keyframes progress { 0% { width: 0%; } 100% { width: 100%; } }
+    @media (max-width: 420px) { .splash-logo { width: 80px; height: 80px; font-size: 36px; border-radius: 20px; } .splash-title { font-size: 22px; } .splash-subtitle { font-size: 11px; } }
+    @media (max-width: 380px) { .splash-logo { width: 70px; height: 70px; font-size: 32px; border-radius: 18px; } .splash-title { font-size: 20px; } .splash-subtitle { font-size: 10px; } }
+  </style>
+</head>
+<body>
+
+<div id="splash">
+  <div class="splash-content">
+    <div class="splash-logo">🎙️</div>
+    <div class="splash-title">Aurora Podcast</div>
+    <div class="splash-subtitle">College Audio Platform</div>
+
+  </div>
+</div>
+
+<script>
+  const splashShown = sessionStorage.getItem('splashShown');
+  const splash = document.getElementById('splash');
+  document.body.style.display = 'block';
+  
+  if (!splashShown) {
+    sessionStorage.setItem('splashShown', 'true');
+    setTimeout(() => {
+      splash.classList.add('hidden');
+    }, 2000);
+  } else {
+    splash.style.display = 'none';
+  }
+</script>
+
+<div id="drawer">
+  <div class="drawer-header">
+    <div class="logo">🎙️</div>
+    <h3>Menu</h3>
+  </div>
+  <a href="index.html">Home</a>
+  <a href="events.html">Events</a>
+  <a href="notifications.html">Alerts</a>
+  <a href="downloads.html">Downloads</a>
+  <a href="profile.html" class="active">Profile</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<div id="overlay" onclick="toggleMenu()"></div>
+
+<div class="app">
+
+  <header>
+    <span class="menu" onclick="toggleMenu()">☰</span>
+    <h1>Profile</h1>
+    <span class="theme" onclick="toggleDark()">🌙</span>
+  </header>
+
+  <div class="profile-header">
+    <div class="profile-avatar" id="profileAvatar">S</div>
+    <div class="profile-details">
+      <h2 id="userName">Student</h2>
+      <p id="userEmail">student@aurora.edu.in</p>
+      <span class="user-badge">🎓 Student</span>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <span class="stat-num" id="listensCount">24</span>
+      <span class="stat-label">Listens</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num" id="favoritesCount">12</span>
+      <span class="stat-label">Favorites</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num" id="hoursCount">8</span>
+      <span class="stat-label">Hours</span>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <h3>My Playlists</h3>
+  </div>
+
+  <div class="playlist-item" onclick="playPlaylist('Favorites')">
+    <div class="playlist-icon">❤️</div>
+    <div class="playlist-info">
+      <h4>Favorites</h4>
+      <p>12 episodes • 45 min</p>
+    </div>
+    <button class="play-btn">▶</button>
+  </div>
+
+  <div class="playlist-item" onclick="playPlaylist('Study Material')">
+    <div class="playlist-icon">📚</div>
+    <div class="playlist-info">
+      <h4>Study Material</h4>
+      <p>8 episodes • 2 hrs</p>
+    </div>
+    <button class="play-btn">▶</button>
+  </div>
+
+  <div class="playlist-item" onclick="playPlaylist('Announcements')">
+    <div class="playlist-icon">📢</div>
+    <div class="playlist-info">
+      <h4>Announcements</h4>
+      <p>15 episodes • 30 min</p>
+    </div>
+    <button class="play-btn">▶</button>
+  </div>
+
+  <div class="section-title">
+    <h3>Listening History</h3>
+  </div>
+
+  <div class="history-item">
+    <div class="history-icon">📢</div>
+    <div class="history-info">
+      <h4>Mid-Term Results</h4>
+      <p>Today • 5 min</p>
+    </div>
+    <button class="play-btn" onclick="playAudio('upcoming.mp3', this)">▶</button>
+  </div>
+
+  <div class="history-item">
+    <div class="history-icon">📋</div>
+    <div class="history-info">
+      <h4>College Rules</h4>
+      <p>Yesterday • 4 min</p>
+    </div>
+    <button class="play-btn" onclick="playAudio('rules.mp3', this)">▶</button>
+  </div>
+
+  <div class="section-title">
+    <h3>Account</h3>
+  </div>
+
+  <div class="settings-item" onclick="toggleDark()">
+    <div class="settings-icon">🌙</div>
+    <div class="settings-info">
+      <h4>Dark Mode</h4>
+      <p>Toggle dark theme</p>
+    </div>
+    <span class="settings-arrow">></span>
+  </div>
+
+  <div class="settings-item" onclick="alert('Notifications settings')">
+    <div class="settings-icon">🔔</div>
+    <div class="settings-info">
+      <h4>Notifications</h4>
+      <p>Manage alerts</p>
+    </div>
+    <span class="settings-arrow">></span>
+  </div>
+
+  <div class="settings-item" onclick="alert('Storage: 35 MB used')">
+    <div class="settings-icon">💾</div>
+    <div class="settings-info">
+      <h4>Storage</h4>
+      <p>35 MB used</p>
+    </div>
+    <span class="settings-arrow">></span>
+  </div>
+
+  <div class="settings-item" onclick="alert('Privacy Policy')">
+    <div class="settings-icon">🔒</div>
+    <div class="settings-info">
+      <h4>Privacy</h4>
+      <p>Terms & Privacy</p>
+    </div>
+    <span class="settings-arrow">></span>
+  </div>
+
+  <div class="logout-section">
+  </div>
+
+  <footer>
+    Aurora Podcast v2.0<br>
+    Developed by Charan | Aurora Tech
+  </footer>
+
+</div>
+
+<div id="nowPlaying" class="now-playing-bar">
+  <div class="np-info">
+    <span class="np-icon">▶</span>
+    <div>
+      <p class="np-title" id="npTitle">Not Playing</p>
+      <p class="np-subtitle">Select an episode</p>
+    </div>
+  </div>
+  <button class="np-btn" onclick="stopAudio()">⏹</button>
+</div>
+
+<nav class="bottom-nav">
+  <div class="nav-item" onclick="window.location.href='index.html'">
+    <span class="nav-icon">🏠</span>
+    <span class="nav-label">Home</span>
+  </div>
+  <div class="nav-item" onclick="window.location.href='notifications.html'">
+    <span class="nav-icon">🔔</span>
+    <span class="nav-label">Alerts</span>
+  </div>
+  <div class="nav-item" onclick="window.location.href='events.html'">
+    <span class="nav-icon">📅</span>
+    <span class="nav-label">Events</span>
+  </div>
+  <div class="nav-item" onclick="window.location.href='downloads.html'">
+    <span class="nav-icon">⬇️</span>
+    <span class="nav-label">Downloads</span>
+  </div>
+  <div class="nav-item active">
+    <span class="nav-icon">👤</span>
+    <span class="nav-label">Profile</span>
+  </div>
+</nav>
+
+<audio id="player"></audio>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="firebase-init.js"></script>
+<script src="auth-guard.js"></script>
+<script src="script.js"></script>
+<script>
+  // Display user info if available
+  auth.onAuthStateChanged(function(user) {
+    if (user) {
+      var name = user.email.split('@')[0];
+      document.getElementById('userName').textContent = name;
+      document.getElementById('userEmail').textContent = user.email;
+      document.getElementById('profileAvatar').textContent = name.charAt(0).toUpperCase();
+    }
+  });
+</script>
+</body>
+</html>
